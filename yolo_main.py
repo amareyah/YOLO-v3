@@ -11,7 +11,7 @@ yolo_weights_file_path = 'cfg/yolov3.weights'
 confidence_threshold = 0.55
 nms_threshold = 0.5
 
-device = 'cpu' # 'cuda' if torch.cuda.is_available() else 'cpu'
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("Creating model...")
 dn = detect.Main_Module(config_file_path, yolo_weights_file_path).eval().to(device)
 print("Model created successfully.\n")
@@ -22,7 +22,7 @@ assert dn.net_info["height"] > 32
 assert dn.net_info["width"] > 32
 
 # I define here an image folder, with images to process by model.
-image_path = 'images2'
+image_path = 'images'
 image_path = osp.realpath(image_path)
 
 # This is destination folder, where processed images will be saved.
